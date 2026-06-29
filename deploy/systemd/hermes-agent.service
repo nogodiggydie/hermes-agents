@@ -30,7 +30,7 @@ LimitNPROC=4096
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
-ProtectHome=true
+ProtectHome=read-only
 ReadWritePaths=/home/ubuntu/hermes-agents/agent-service/data
 ReadWritePaths=/home/ubuntu/hermes-agents/agent-service/agents
 
