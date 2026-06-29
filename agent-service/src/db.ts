@@ -27,11 +27,7 @@ export function getDb(): Database.Database {
 }
 
 // Export singleton instance for convenience
-export const db = getDb();
-  return dbInstance;
-}
-
-export const db = getDb();
+export const db: Database.Database = getDb();
 
 export function initDb(): Database.Database {
   const db = getDb();
