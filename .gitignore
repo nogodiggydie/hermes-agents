@@ -1,0 +1,84 @@
+# --- Secrets & local config (NEVER commit) ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+.aws/
+.gcp/
+.ssh/
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+.next/
+.nuxt/
+dist/
+build/
+coverage/
+.nyc_output/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.uv-cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# --- uv ---
+uv.lock.bak
+
+# --- Editors / OS ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.goutputstream-*
+
+# --- Build / artifacts ---
+*.log
+*.tsbuildinfo
+.cache/
+.parcel-cache/
+.turbo/
+.tmp/
+
+# --- Docker ---
+.docker-volumes/
+
+# --- Project-specific (override per repo) ---
+# Add anything specific to this project below.
+# Add to gitignore-base.txt for hermes-agents
+
+# Anything that touches AWS creds
+.aws-credentials
+.bastion-tunnel.pid
+
+# Local prompt eval state
+evals/.cache/
+tools/.venv/
+
+# Stale prompt bundles
+prompts/.compiled/
