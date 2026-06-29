@@ -13,7 +13,7 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const DB_PATH = join(__dirname, "..", "..", "data", "agent-service.db");
+const DB_PATH = join(__dirname, "..", "data", "agent-service.db");
 
 // Singleton database instance
 let dbInstance: Database.Database | null = null;
