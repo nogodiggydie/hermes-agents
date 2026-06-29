@@ -87,16 +87,19 @@ export class MetricsCollector {
         if (agent.status === "running" && agent.pid) {
           try {
             const usage = await pidusage(agent.pid);
+            const stats = usage[agent.pid!];
+            if (!stats) continue;
+
             const agentMetrics: AgentMetrics = {
               agentId: agent.id,
-              cpuPercent: usage.cpu,
-              memoryMb: usage.memory / 1024 / 1024,
+              cpuPercent: stats.cpu,
+              memoryMb: stats.memory / 1024 / 1024,
               timestamp: new Date(),
             };
             insertAgentMetrics(db, agentMetrics);
 
-            agent.cpuPercent = usage.cpu;
-            agent.memoryMb = usage.memory / 1024 / 1024;
+            agent.cpuPercent = stats.cpu;
+            agent.memoryMb = stats.memory / 1024 / 1024;
             agent.uptime = Math.floor((Date.now() - (agent.startedAt?.getTime() || Date.now())) / 1000);
           } catch {
             // Process might have exited

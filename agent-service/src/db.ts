@@ -15,11 +15,23 @@ const __dirname = dirname(__filename);
 
 const DB_PATH = join(__dirname, "..", "..", "data", "agent-service.db");
 
+// Singleton database instance
+let dbInstance: Database.Database | null = null;
+
 export function getDb(): Database.Database {
-  const db = new Database(DB_PATH);
-  db.pragma("journal_mode = WAL");
-  return db;
+  if (!dbInstance) {
+    dbInstance = new Database(DB_PATH);
+    dbInstance.pragma("journal_mode = WAL");
+  }
+  return dbInstance;
 }
+
+// Export singleton instance for convenience
+export const db = getDb();
+  return dbInstance;
+}
+
+export const db = getDb();
 
 export function initDb(): Database.Database {
   const db = getDb();

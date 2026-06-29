@@ -3,7 +3,17 @@ import { agentManager } from "./agent-manager.js";
 import { metricsCollector } from "./metrics-collector.js";
 import { logAggregator } from "./log-aggregator.js";
 import { costTracker } from "./cost-tracker.js";
-import { db, getAllAgents, getAgent, upsertAgent, deleteAgent } from "./db.js";
+import {
+  db,
+  getAllAgents,
+  getAgent,
+  upsertAgent,
+  deleteAgent,
+  getSystemMetricsHistory,
+  getAgentMetricsHistory,
+  getCosts,
+  getCostSummaries,
+} from "./db.js";
 import {
   AgentInfo,
   AgentConfig,
@@ -142,7 +152,6 @@ export function setupRoutes(app: any): void {
       const limit = parseInt(req.query.limit as string) || 288;
       const agentId = req.query.agentId as string;
 
-      const { getSystemMetricsHistory, getAgentMetricsHistory } = await import("./db.js");
       const systemHistory = getSystemMetricsHistory(db, limit);
 
       let agentHistory: any[] = [];
@@ -175,7 +184,6 @@ export function setupRoutes(app: any): void {
       const since = req.query.since ? new Date(req.query.since as string) : null;
       const limit = parseInt(req.query.limit as string) || 100;
 
-      const { getCosts, getCostSummaries } = await import("./db.js");
       const costs = getCosts(db, agentId || undefined, provider || undefined, since || undefined, limit);
       const summaries = getCostSummaries(db, since || undefined);
 

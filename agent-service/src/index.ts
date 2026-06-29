@@ -9,6 +9,7 @@ import { initDb } from "./db.js";
 import { agentManager } from "./agent-manager.js";
 import { metricsCollector } from "./metrics-collector.js";
 import { logAggregator } from "./log-aggregator.js";
+import { costTracker } from "./cost-tracker.js";
 import { setupRoutes } from "./routes.js";
 import { LogEntry, LogLevel } from "./types.js";
 
@@ -54,7 +55,6 @@ agentManager.on("log", (entry: LogEntry) => {
 });
 
 agentManager.on("cost", (costData: any) => {
-  const { costTracker } = await import("./cost-tracker.js");
   costTracker.recordCost({
     type: "cost",
     provider: costData.provider,
