@@ -18,10 +18,14 @@ export class AgentManager extends EventEmitter {
 
   constructor() {
     super();
-    this.restoreAgents();
+    try {
+      this.restoreAgents();
+    } catch {
+      // DB not initialized yet - restoreAgents will be called after initDb()
+    }
   }
 
-  private restoreAgents(): void {
+  restoreAgents(): void {
     const agents = getAllAgents(db);
     for (const agent of agents) {
       if (agent.status === "running" && agent.pid) {

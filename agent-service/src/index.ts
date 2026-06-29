@@ -67,6 +67,7 @@ agentManager.on("cost", (costData: any) => {
 
 async function start(): Promise<void> {
   initDb();
+  agentManager.restoreAgents();
 
   metricsCollector.start();
 
