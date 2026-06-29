@@ -342,7 +342,7 @@ export function getCostSummaries(
 
   query += " GROUP BY provider, model ORDER BY total_cost_usd DESC";
 
-  const rows = db.prepare(query).all(...params);
+  const rows = db.prepare(query).all(...params) as any[];
   return rows.map((row) => ({
     provider: row.provider,
     model: row.model,
@@ -354,7 +354,7 @@ export function getCostSummaries(
 }
 
 export function getPricing(db: Database.Database): Map<string, Map<string, { in: number; out: number }>> {
-  const rows = db.prepare("SELECT * FROM pricing").all();
+  const rows = db.prepare("SELECT * FROM pricing").all() as any[];
   const pricing = new Map<string, Map<string, { in: number; out: number }>>();
   for (const row of rows) {
     if (!pricing.has(row.provider)) {
